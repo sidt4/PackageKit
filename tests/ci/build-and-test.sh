@@ -6,6 +6,8 @@ if [ -d "build" ]; then
 fi
 set -x
 
+export CCACHE_DIR=/ccache/
+
 meson setup build \
     -Dlocal_checkout=true \
     -Dmaintainer=true \
@@ -18,6 +20,9 @@ rm -rf $DUMMY_DESTDIR
 # Build & Install
 ninja -C build
 DESTDIR=$DUMMY_DESTDIR ninja -C build install
+
+# Print ccache stats
+ccache -s
 
 # Run tests
 mkdir -p /run/dbus/

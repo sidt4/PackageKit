@@ -22,5 +22,8 @@ RUN dnf -y install libalpm-devel
 # install dependencies for 'zypp' backend
 RUN dnf -y install libzypp-devel
 
+# install ccache for build time optimization
+RUN dnf -y install ccache
+
 RUN mkdir /build
 WORKDIR /build
